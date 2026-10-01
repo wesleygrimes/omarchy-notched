@@ -2,7 +2,7 @@
 
 ## 0.2.0
 
-- Rename the plugin ID to `wesgrimes.notched`. The display name remains Notched.
+- Rename the plugin ID to `ncfrontiersman.notched`. The display name remains Notched.
 - Existing 0.1.x installations need the migration in the README; widget layouts
   and notch settings can be retained.
 

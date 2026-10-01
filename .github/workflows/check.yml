@@ -18,7 +18,7 @@ jobs:
           const assert = require('node:assert/strict');
           const m = JSON.parse(fs.readFileSync('manifest.json'));
           assert.equal(m.schemaVersion, 1);
-          assert.equal(m.id, 'wesgrimes.notched');
+          assert.equal(m.id, 'ncfrontiersman.notched');
           assert.deepEqual(m.kinds, ['bar']);
           assert.ok(fs.existsSync(m.entryPoints.bar));
           for (const file of ['BarModel.js', 'NotchModel.js', 'ModelSync.js', 'LICENSE']) assert.ok(fs.existsSync(file));

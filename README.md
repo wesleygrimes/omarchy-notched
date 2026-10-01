@@ -86,7 +86,7 @@ normally activates without one.
 ## Migrating from 0.1.x
 
 Version 0.2.0 changes the plugin ID from `pro.grimes.notched` to
-`wesgrimes.notched`. An existing checkout does not automatically move to the new
+`ncfrontiersman.notched`. An existing checkout does not automatically move to the new
 plugin directory. Switch to the built-in bar, remove the old installation, then
 install the new ID:
 
@@ -102,7 +102,7 @@ uses them without rearranging your widgets.
 ## Update or switch back
 
 ```bash
-omarchy plugin update wesgrimes.notched
+omarchy plugin update ncfrontiersman.notched
 omarchy restart shell
 ```
 
@@ -115,13 +115,13 @@ omarchy bar use omarchy.bar
 Switch back:
 
 ```bash
-omarchy bar use wesgrimes.notched
+omarchy bar use ncfrontiersman.notched
 ```
 
 To uninstall, first switch back to the built-in bar, then run:
 
 ```bash
-omarchy plugin remove wesgrimes.notched
+omarchy plugin remove ncfrontiersman.notched
 ```
 
 Your widgets remain in their sections. The stock bar ignores `notchSide` and
