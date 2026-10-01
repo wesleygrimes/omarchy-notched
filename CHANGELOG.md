@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.0
+
+- Rename the plugin ID to `wesgrimes.notched`. The display name remains Notched.
+- Existing 0.1.x installations need the migration in the README; widget layouts
+  and notch settings can be retained.
+
 ## 0.1.1
 
 - Remove full-bar widget reconstruction after a drop. Unrelated widgets stay

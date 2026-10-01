@@ -83,10 +83,26 @@ restart it to avoid cached QML components.
 Let the bar finish loading before requesting a restart; a fresh installation
 normally activates without one.
 
+## Migrating from 0.1.x
+
+Version 0.2.0 changes the plugin ID from `pro.grimes.notched` to
+`wesgrimes.notched`. An existing checkout does not automatically move to the new
+plugin directory. Switch to the built-in bar, remove the old installation, then
+install the new ID:
+
+```bash
+omarchy bar use omarchy.bar
+omarchy plugin remove pro.grimes.notched
+omarchy plugin add https://github.com/wesleygrimes/omarchy-notched.git --enable
+```
+
+Keep your `bar.layout`, `notchSide`, and `bar.notch` settings. The new installation
+uses them without rearranging your widgets.
+
 ## Update or switch back
 
 ```bash
-omarchy plugin update pro.grimes.notched
+omarchy plugin update wesgrimes.notched
 omarchy restart shell
 ```
 
@@ -99,13 +115,13 @@ omarchy bar use omarchy.bar
 Switch back:
 
 ```bash
-omarchy bar use pro.grimes.notched
+omarchy bar use wesgrimes.notched
 ```
 
 To uninstall, first switch back to the built-in bar, then run:
 
 ```bash
-omarchy plugin remove pro.grimes.notched
+omarchy plugin remove wesgrimes.notched
 ```
 
 Your widgets remain in their sections. The stock bar ignores `notchSide` and
