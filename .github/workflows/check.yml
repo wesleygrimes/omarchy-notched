@@ -21,5 +21,19 @@ jobs:
           assert.equal(m.id, 'pro.grimes.notched');
           assert.deepEqual(m.kinds, ['bar']);
           assert.ok(fs.existsSync(m.entryPoints.bar));
-          for (const file of ['BarModel.js', 'NotchModel.js', 'LICENSE']) assert.ok(fs.existsSync(file));
+          for (const file of ['BarModel.js', 'NotchModel.js', 'ModelSync.js', 'LICENSE']) assert.ok(fs.existsSync(file));
           JS
+  qml:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Qt test tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y qt6-declarative-dev-tools qml6-module-qtquick qml6-module-qtquick-window qml6-module-qttest qml6-module-qtqml-models qml6-module-qtqml-workerscript
+      - name: Test live delegate preservation
+        env:
+          QT_QPA_PLATFORM: offscreen
+          QT_QPA_PLATFORMTHEME: ''
+          QT_QUICK_CONTROLS_STYLE: Fusion
+        run: /usr/lib/qt6/bin/qmltestrunner -input tests/tst_modelsync.qml -import .

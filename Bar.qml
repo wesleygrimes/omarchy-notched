@@ -4,10 +4,12 @@ import Quickshell.Io
 import Quickshell.Wayland
 import QtQuick
 import QtQuick.Layouts
+import QtQml.Models
 import qs.Commons
 import qs.Ui
 import "BarModel.js" as BarModel
 import "NotchModel.js" as NotchModel
+import "ModelSync.js" as ModelSync
 
 Item {
   id: root
@@ -103,6 +105,7 @@ Item {
   property var barMoveScreen: null
   property var clickTargets: []
   property var moduleSlots: []
+  property int nextSlotInstance: 0
 
   function registerClickTarget(target) {
     if (!target || clickTargets.indexOf(target) !== -1) return
@@ -140,6 +143,7 @@ Item {
       }
       out.push({
         id: slot.moduleName,
+        instance: slot.instanceSerial,
         section: slot.region,
         x: Math.round(point.x),
         y: Math.round(point.y),
@@ -1628,6 +1632,14 @@ Item {
     property string region: ""
     property real maximumWidth: 0
 
+    ListModel { id: widgetRows }
+
+    function syncEntries() {
+      ModelSync.sync(widgetRows, entries, function(entry) { return root.entryId(entry) })
+    }
+    onEntriesChanged: syncEntries()
+    Component.onCompleted: syncEntries()
+
     visible: entries.length > 0
     // A hidden list must not build its modules. The center section declares
     // both an anchored and an unanchored arrangement and shows whichever
@@ -1665,13 +1677,13 @@ Item {
 
           Repeater {
             id: boundedRepeater
-            model: moduleListRoot.entries
+            model: widgetRows
             onItemAdded: boundedList.childrenRevision++
             onItemRemoved: boundedList.childrenRevision++
 
             ModuleSlot {
-              required property var modelData
-              entry: modelData
+              required property string payload
+              entry: JSON.parse(payload)
               region: moduleListRoot.region
             }
           }
@@ -1686,11 +1698,11 @@ Item {
         spacing: 0
 
         Repeater {
-          model: moduleListRoot.entries
+          model: widgetRows
 
           ModuleSlot {
-            required property var modelData
-            entry: modelData
+            required property string payload
+            entry: JSON.parse(payload)
             region: moduleListRoot.region
           }
         }
@@ -1704,11 +1716,11 @@ Item {
         spacing: 0
 
         Repeater {
-          model: moduleListRoot.entries
+          model: widgetRows
 
           ModuleSlot {
-            required property var modelData
-            entry: modelData
+            required property string payload
+            entry: JSON.parse(payload)
             region: moduleListRoot.region
           }
         }
@@ -1720,6 +1732,7 @@ Item {
     id: slot
 
     required property var entry
+    property int instanceSerial: 0
     property string region: ""
     readonly property string moduleName: root.entryId(entry)
     readonly property string notchSide: region === "center" ? (entry && entry.notchSide === "right" ? "right" : "left") : ""
@@ -1761,7 +1774,10 @@ Item {
     height: implicitHeight
     z: modulePointer.dragging ? 100 : 0
 
-    Component.onCompleted: root.registerModuleSlot(slot)
+    Component.onCompleted: {
+      instanceSerial = ++root.nextSlotInstance
+      root.registerModuleSlot(slot)
+    }
     Component.onDestruction: {
       if (root.barDragSource === slot) root.clearBarDrag()
       root.unregisterModuleSlot(slot)

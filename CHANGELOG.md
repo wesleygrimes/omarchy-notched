@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.1
+
+- Remove full-bar widget reconstruction after a drop. Unrelated widgets stay
+  alive; reordering within a group preserves every live widget instance.
+- Add Qt regression tests for delegate identity, settings updates, and model edits.
+
 ## 0.1.0
 
 - Split the top bar around an Apple Silicon MacBook camera notch.

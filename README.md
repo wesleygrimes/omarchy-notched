@@ -5,6 +5,8 @@ An Omarchy bar that makes room for the MacBook camera notch.
 Keep your existing widgets and theme, then drag widgets to the screen edges or
 right beside either side of the camera. Crowded groups wrap onto additional rows
 and reserve the extra height so application windows stay below the bar.
+Reordering within a group keeps live widgets mounted. Moving between groups
+reloads only the moved widget rather than rebuilding the entire bar.
 
 ![Notched layout](docs/layout.svg)
 
@@ -125,10 +127,11 @@ when those interfaces change. See [UPSTREAM.md](UPSTREAM.md) for the base files.
 bash scripts/check.sh
 ```
 
-Checks require Node.js and an installed Omarchy CLI. Node is only a development
-dependency. The tests cover screen scaling, cutout detection, four drag
+Checks require Node.js, Qt 6's `qmltestrunner` and QtTest QML module, and an
+installed Omarchy CLI. These test tools are only development dependencies.
+The tests cover live widget identity, screen scaling, cutout detection, four drag
 destinations, camera exclusion, and preserving settings while moving widgets.
-GitHub Actions runs the portable tests and package metadata checks.
+GitHub Actions runs the portable tests, Qt model tests, and package metadata checks.
 
 ## Next
 
