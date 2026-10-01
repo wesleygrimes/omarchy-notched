@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="220" viewBox="0 0 1280 220">
+  <rect width="1280" height="220" rx="16" fill="#14181f"/>
+  <text x="36" y="42" fill="#f2f3f5" font-family="sans-serif" font-size="24" font-weight="600">Notched</text>
+  <text x="36" y="69" fill="#a9b3c1" font-family="sans-serif" font-size="15">Your widgets, with room for the camera.</text>
+  <rect x="32" y="94" width="1216" height="58" rx="8" fill="#262d38"/>
+  <rect x="563" y="94" width="154" height="58" rx="12" fill="#080a0e"/>
+  <circle cx="640" cy="110" r="4" fill="#242c3c"/>
+  <g fill="#a6e3a1" font-family="sans-serif" font-size="17">
+    <text x="52" y="129">Menu · Workspaces</text>
+    <text x="448" y="129">Clock</text>
+    <text x="730" y="129">Weather · Agents</text>
+    <text x="1062" y="129">Wi-Fi · Battery</text>
+  </g>
+  <g fill="#a9b3c1" font-family="sans-serif" font-size="14">
+    <text x="52" y="183">Screen left</text>
+    <text x="448" y="183">Notch left</text>
+    <text x="730" y="183">Notch right</text>
+    <text x="1101" y="183">Screen right</text>
+  </g>
+  <text x="640" y="183" text-anchor="middle" fill="#687588" font-family="sans-serif" font-size="13">camera gap</text>
+</svg>

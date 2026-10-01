@@ -1,0 +1,25 @@
+name: Check
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node --test tests/*.test.cjs
+      - name: Validate package metadata
+        run: |
+          node - <<'JS'
+          const fs = require('node:fs');
+          const assert = require('node:assert/strict');
+          const m = JSON.parse(fs.readFileSync('manifest.json'));
+          assert.equal(m.schemaVersion, 1);
+          assert.equal(m.id, 'pro.grimes.notched');
+          assert.deepEqual(m.kinds, ['bar']);
+          assert.ok(fs.existsSync(m.entryPoints.bar));
+          for (const file of ['BarModel.js', 'NotchModel.js', 'LICENSE']) assert.ok(fs.existsSync(file));
+          JS

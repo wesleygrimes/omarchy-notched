@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "id": "pro.grimes.notched",
+  "name": "Notched",
+  "version": "0.1.0",
+  "author": "Wes Grimes",
+  "license": "MIT",
+  "homepage": "https://github.com/wesleygrimes/omarchy-notched",
+  "description": "An Omarchy bar that makes room for the MacBook camera notch, with four drag destinations and wrapping widget groups.",
+  "kinds": [
+    "bar"
+  ],
+  "entryPoints": {
+    "bar": "Bar.qml"
+  }
+}
