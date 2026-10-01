@@ -12,12 +12,14 @@ and reserve the extra height so application windows stay below the bar.
 
 ```bash
 omarchy plugin add https://github.com/wesleygrimes/omarchy-notched.git --enable
-omarchy restart shell
 ```
 
 The plugin replaces the active bar while keeping your widget layout and settings.
 It uses the Quickshell and Hyprland components already shipped with Omarchy;
 there are no additional runtime packages or system services to install.
+
+This initial release is experimental. See [known issues](docs/known-issues.md)
+for the native Quickshell crash observed during a rapid bar switch/restart.
 
 **Requirements:** Omarchy Quattro with the Quickshell plugin system, an Apple
 Silicon MacBook, and the full notched display area already exposed by Asahi.
@@ -76,6 +78,8 @@ Omarchy's theme `notch-height` can also raise the minimum bar height.
 
 The shell reloads configuration on save. After plugin code changes or updates,
 restart it to avoid cached QML components.
+Let the bar finish loading before requesting a restart; a fresh installation
+normally activates without one.
 
 ## Update or switch back
 
